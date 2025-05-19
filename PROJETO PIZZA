@@ -1,0 +1,33 @@
+import numpy as np #manipular os arrays.
+import matplotlib.pyplot as plt #vizualisar os dados.
+from sklearn.linear_model import LinearRegression #criar o modelo de regressão linear.
+from sklearn.metrics import mean_squared_error, r2_score #avaliar o modelo.
+
+
+x = np.array([6, 8, 10, 14, 18]) #diametro de polegada das pizzas.
+y = np.array([7, 9, 13, 17.5, 19]) #preço em reais.
+
+
+plt.scatter(x,y) #criar grafico.
+plt.xlabel('Diametro em polegadas') #adicionar o rotulo do  eixo X.
+plt.ylabel('Preço em reais') #adicionar o rotulo do eixo Y.
+plt.title('Preço da pizza em razão do seu diametro') #adicionar o titulo do grafico.
+plt.show() #mostra o grafico.
+
+
+model = LinearRegression() #instacionar o modelo.
+x = x.reshape(-1, 1) #transfomar o array X em uma matriz de uma coluna.
+model.fit(x, y) #treinar modelo com os dados.
+
+
+y_pred = model.predict(x) #fazer previões para os dadps do treino.
+mse = mean_squared_error(y, y_pred) #calcular oe rro quadratico medio.
+r2 = r2_score(y, y_pred) #calcular o coeficiente de determinação.
+print(f'MSE = {mse : .2f}')
+print(f'R2 = {r2 : .2f}')
+
+
+x_new = np.array([12]) #diameto da nov pizza em polegadas
+y_new = model.predict(x_new.reshape(-1 , 1)) #fazer previsão para uma nova pizza
+
+print(f'Uma pizza de {x_new[0]} polegadas custa R${y_new[0]:.2f} reais')
