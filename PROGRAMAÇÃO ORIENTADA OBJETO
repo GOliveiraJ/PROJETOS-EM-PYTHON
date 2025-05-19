@@ -1,0 +1,100 @@
+#Relembrando.
+def teste(v ,i):
+    valor = v
+    incremento = i
+    resultado = valor + incremento
+    return resultado
+
+a = teste(50,20)
+print(a)
+
+
+#Classes e metodos.
+class InstitutoTecmat:
+    def incremento(self, v, i):
+        valor = v
+        incremento = i
+        resultado = valor + incremento
+        return resultado
+a = InstitutoTecmat()
+b = a.incremento(10,5)
+print(b)
+
+
+class InstitutoTecmat:
+    def incremento(self, v, i):
+        self.valor = v
+        self.incremento = i
+        self.resultado = self.valor + self.incremento
+        return self.resultado
+
+a = InstitutoTecmat()  
+b = a.incremento(10,5)
+print(a.valor)
+
+
+class InstitutoTecmat:
+    def __init__(self, v=10, i=1):
+        self.valor = v
+        self.incremento = i
+        self.valor_exponencial = v
+    def incrementa(self):
+        self.valor = self.valor + self.incremento
+    def verifica(self):
+        if(self.valor > 12):
+            print("Ultrapassou o valor")
+        else:
+            print("Não ultrapassou o valor")
+    def exponencial(self, e):
+        self.valor_exponencial = self.valor**e
+    def incrementa_quadrado(self):
+        self.incrementa()
+        self.exponencial(2)
+
+a = InstitutoTecmat()
+
+a.incrementa()
+print(a.valor)
+a.verifica()
+a.exponencial(3)
+print(a.valor_exponencial)
+a.incrementa_quadrado()
+print(a.valor)
+
+
+#Herança.
+class Calculos(InstitutoTecmat):
+    pass
+
+c = Calculos()
+c.incrementa()
+print(c.valor)
+
+
+class Calculos(InstitutoTecmat):
+    def decrementa(self):
+        self.valor = self.valor - self.incremento
+
+
+c = Calculos()
+c.incrementa()
+print(c.valor)
+c = Calculos()
+c.decrementa()
+print(c.valor)
+
+
+class Calculos(InstitutoTecmat):
+    def __init__(self, d = 5):
+        super().__init__(v = 10, i = 1)
+        self.divisor = d
+    def decrementa(self):
+        self.valor = self.valor - self.incrementa
+    def divide(self):
+        self.valor = self.valor/self.divisor
+
+
+c = Calculos()
+c.incrementa()
+print(c.valor)
+
