@@ -1,0 +1,48 @@
+import sqlite3, time
+conectar = sqlite3.connect('C:/Users/gabri/Progamação/Projetos_em_Python/Agenda_SQL.db')
+c = conectar.cursor()
+
+def criar_db():
+    c.execute("CREATE TABLE IF NOT EXISTS cadastro (Nome text, Telefone varchar, Email text, Data text)")
+
+try:
+    criar_db()
+except:
+    print("ERROR")
+else:
+    print("Banco de dados criado com sucesso!")
+
+def inserir(n, t, e):
+    d = time.strftime('%d/%m/%Y')
+    c.execute('INSERIR INTO cadastro VALUES(?, ?, ?, ?)',(n, t, e, d))
+    conectar.commit()
+
+def pesquisar(p):
+    sql = 'SELECT * FROM WHERE nome = ?'
+    for row in c.execute(sql,(p,)):
+        print(row)
+
+fc = int(input('1 - Cadastrar\n 2 - Pesquisar \n 3 - Selcione uma opção:'))
+
+if (fc == 1):
+    try:
+        print("Cadastro de agenda")
+        time.sleep(3)
+        n = str (input("Informe seu nome:"))
+        t = str (input("Informe seu telefone:"))
+        e = str (input("Informe seu email:"))
+        inserir(n, t, e)
+
+    except:
+        print("ERROR")
+    else:
+        print("Cadastro realizado")
+
+elif(fc == 2):
+    print("AGuarde um momento.")
+    p = str(input("Infome o nome a ser pesquisado:"))
+    pesquisar(p)
+else:
+    print("ERROR")
+
+print(input("Aperte ENTER para finalizar"))
