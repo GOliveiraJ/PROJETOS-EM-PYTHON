@@ -1,0 +1,13 @@
+import sqlite3
+banco = sqlite3.connect('C:/Users/gabri/Progamação/Projetos_em_Python/Primeiro_Banco.db')
+cursor = banco.cursor()
+
+
+cursor.execute("CREATE TABLE alunos (Nome text, Idade integer, Email text)")
+cursor.execute("INSERT INTO alunos VALUES('Luana', '16', 'luana@gmail.com')")
+
+banco.commit()
+
+cursor.execute("SELECT*FROM alunos")
+
+print(cursor.fetchall())
