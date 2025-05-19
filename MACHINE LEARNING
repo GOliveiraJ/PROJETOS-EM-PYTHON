@@ -1,0 +1,32 @@
+#Carregamento de dados.
+import pandas as pd
+arquivo = pd.read_csv('C:/Users/gabri/OneDrive/Imagens/Nova pasta/wine_dataset.csv')
+
+arquivo.head()
+
+#Trocando valores do vinho.
+arquivo['style'] = arquivo['style'].replace('red',0)
+arquivo['style'] = arquivo['style'].replace('white',1)
+
+
+y = arquivo['style']
+x = arquivo.drop('style', axis = 1)
+
+
+#Criando treino e teste.
+from sklearn.model_selection import train_test_split
+x_treino, x_teste, y_treino, y_teste =  train_test_split (x, y, test_size = 0.3)
+
+from sklearn.ensemble import ExtraTreesClassifier
+#Criando modelo.
+modelo = ExtraTreesClassifier()
+modelo.fit(x_treino, y_treino)
+#Imprimindo resultado.
+resultado = modelo.score(x_teste, y_teste)
+print("Probabilidade",resultado)
+
+
+y_teste[500:505]
+x_teste[500:505]
+previsao = modelo.predict(x_teste[500:505])
+print(previsao)
